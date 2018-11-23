@@ -1,0 +1,5 @@
+.container {
+   /* background: linear-gradient(45deg, white, green); */
+   /* background: linear-gradient(to bottom, white, green); */
+   background: linear-gradient(to top, white, green);
+}
