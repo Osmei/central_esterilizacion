@@ -21,7 +21,7 @@ $configuration = [
 ];
 $container = new \Slim\Container($configuration);
 $app = new \Slim\App($container);
-if($checkAuthentication) $app->add(new AuthMiddleware());
+//if($checkAuthentication) $app->add(new AuthMiddleware());
 $app->add(new CorsMiddleware());
 
 $container['notFoundHandler'] = function($container) {
@@ -121,32 +121,22 @@ $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
 });
 
-require_once '../Controller/AuthController.php';
-(new AuthController($app))->init();
+/*require_once '../Controller/AuthController.php';
+(new AuthController($app))->init();*/
 
-/*
-require_once '../Controller/UsuarioController.php';
-require_once '../Controller/PermisosController.php';
-require_once '../Controller/PerfilesController.php';
-require_once '../Controller/UnidadesController.php';
-require_once '../Controller/ParametrosController.php';
-require_once '../Controller/LaboratoriosController.php';
-require_once '../Controller/DeterminacionesController.php';
-require_once '../Controller/MetodosController.php';
-require_once '../Controller/SeriesController.php';
-require_once '../Controller/PresentacionesController.php';
+require_once '../Controller/EmpresaEsterilizadoraController.php';
+(new EmpresaEsterilizadoraController($app))->init();
+
+require_once '../Controller/MetodoController.php';
+(new MetodoController($app))->init();
+
+require_once '../Controller/OperadorCEController.php';
+(new OperadorCEController($app))->init();
+
+require_once '../Controller/ProveedorController.php';
+(new ProveedorController($app))->init();
 
 
-(new UsuarioController($app))->init();
-(new PermisosController($app))->init();
-(new PerfilesController($app))->init();
-(new UnidadesController($app))->init();
-(new ParametrosController($app))->init();
-(new LaboratoriosController($app))->init();
-(new DeterminacionesController($app))->init();
-(new MetodosController($app))->init();
-(new SeriesController($app))->init();
-(new PresentacionesController($app))->init();*/
 
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {
     $handler = $this->notFoundHandler; // handle using the default Slim page not found handler

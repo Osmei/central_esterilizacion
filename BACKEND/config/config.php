@@ -3,7 +3,7 @@ return [
     'database' => [
         'host' => 'localhost',
         'port' => '3306',
-        'database' => 'historiasclinicas',
+        'database' => 'central_esterilizacion',
         'username' => 'root',
         'password' => 's4ndr0i99i'
     ],
