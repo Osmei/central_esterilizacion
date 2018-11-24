@@ -2,4 +2,15 @@
    /* background: linear-gradient(45deg, white, green); */
    /* background: linear-gradient(to bottom, white, green); */
    background: linear-gradient(to top, white, green);
+   border-radius: 2px;
+   font-style: italic;
+   font-weight: 600;
+}
+.title {
+   text-transform: uppercase;
+   font-style: italic;
+   font-weight: 900;
+   font-size: 3rem;
+   line-height: .8;
+   color: #fff;
 }
