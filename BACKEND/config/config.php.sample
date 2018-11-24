@@ -1,0 +1,19 @@
+<?php
+return [
+	'webUrl' => 'http://...',
+    'database' => [
+        'host' => '',
+        'port' => '',
+        'database' => '',
+        'username' => '',
+        'password' => ''
+    ],
+    'authentication' => [
+        'session'  => [
+	        'timeout' => 60 // minutos
+	    ],
+	    'activation' => [
+	    	'timeout' => 2880 // minutos
+	    ]
+	]
+];
