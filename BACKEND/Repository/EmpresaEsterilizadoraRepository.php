@@ -6,7 +6,7 @@ class EmpresaEsterilizadoraRepository extends AbstractRepository {
 
     public function get($id) {
         try{
-            $sql = "SELECT * FROM proveedor WHERE id=:id";
+            $sql = "SELECT * FROM empresaesterilizadora WHERE id=:id";
             $db = $this->connect();
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':id', $id);
@@ -34,7 +34,7 @@ class EmpresaEsterilizadoraRepository extends AbstractRepository {
         try{
             $db = $this->connect();
             $proveedores = Array();
-            $sql = "SELECT * FROM proveedor";
+            $sql = "SELECT * FROM empresaesterilizadora";
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $items = $stmt->fetchAll(PDO::FETCH_OBJ);
