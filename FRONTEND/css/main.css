@@ -14,3 +14,33 @@
    line-height: .8;
    color: #fff;
 }
+.errorContainer {
+   display: flex;
+   justify-content: center;
+   align-content: center;
+}
+.error {
+   width: 60%;
+   height: 40px;
+   color: #fff;
+   background:  rgb(209, 69, 69);
+   border-radius: 25px;
+   font-size: 18px;
+   font-style: italic;
+   text-align: center;
+}
+.focus-paciente:focus {
+   outline: 5px solid rgb(214, 71, 71);
+   border-radius: 2px;
+   transition: all 1.9s;
+} 
+.focus-descripcion:focus {
+   outline: 5px solid rgb(214, 71, 71);
+   border-radius: 2px;
+   transition: all 1.9s;
+}
+.focus-proveedor:focus {
+   outline: 5px solid rgb(214, 71, 71);
+   border-radius: 2px;
+   transition: all 1.9s;
+}

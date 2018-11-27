@@ -23,9 +23,7 @@
                         <div class="col-sm-4">
                               <div class="form-group">
                                     <label for="operador">Operador CE</label>
-                                    <Select class="form-control" aria-placeholder="Elegir operador" id="operadorSelect" name="operador"></Select>
-                                    <!--input type="text" class="form-control" id="operador" aria-describedby="operadorHelp"
-                                    placeholder="Operador"-->
+                                    <select class="form-control" aria-placeholder="Elegir operador" id="operadorSelect" name="operador"></select>
                               </div>
                         </div>
                         <div class="col-sm-4">
@@ -47,8 +45,8 @@
                         <div class="col-sm-6">
                               <div class="form-group">
                                     <label for="paciente">Paciente</label>
-                                    <input type="text" class="form-control" id="paciente" aria-describedby="pacienteHelp"
-                                    placeholder="Nombre y Apellido del Paciente">
+                                    <input type="text" class="form-control focus-paciente" id="paciente" aria-describedby="pacienteHelp"
+                                    placeholder="Nombre y Apellido del Paciente" requiere>
                               </div>
                         </div>
                         <div class="col-sm-6">
@@ -63,7 +61,7 @@
                         <div class="col-sm-4">
                               <div class="form-group">
                                     <label for="descripcion">Descripcion del Material</label>
-                                    <input type="text" class="form-control" id="descripcion" aria-describedby="descripcionHelp"
+                                    <input type="text" class="form-control focus-descripcion" id="descripcion" aria-describedby="descripcionHelp"
                                     placeholder="Descripcion">
                               </div>
                         </div>
@@ -86,25 +84,19 @@
                         <div class="col-sm-4">
                               <div class="form-group">
                                     <label for="proveedor">Proveedor</label>
-                                    <Select class="form-control" aria-placeholder="Elegir proveedor" id="proveedorSelect" name="proveedor" ></Select>
-                                    <!--input type="text" class="form-control" id="proveedor" aria-describedby="proveedorHelp"
-                                          placeholder="Proveedor"-->
+                                    <select class="form-control focus-proveedor" aria-placeholder="Elegir proveedor" id="proveedorSelect" name="proveedor" ></select>
                               </div>
                         </div>
                         <div class="col-sm-4">
                               <div class="form-group">
                                     <label for="empresaE">Empresa Esterilizadora</label>
-                                    <Select class="form-control" aria-placeholder="Elegir empresa" id="empresaSelect" name="empresa" ></Select>
-                                    <!--input type="text" class="form-control" id="empresaE" aria-describedby="empresaHelp"
-                                    placeholder="Empresa"-->
+                                    <select class="form-control" aria-placeholder="Elegir empresa" id="empresaSelect" name="empresa" ></select>
                               </div>
                         </div>
                         <div class="col-sm-4">
                               <div class="form-group">
                                     <label for="metodo">Método de Esterilización</label>
-                                    <Select class="form-control" aria-placeholder="Elegir método" id="metodoSelect" name="metodo" ></Select>
-                                    <!--input type="text" class="form-control" id="metodo" aria-describedby="metodoHelp"
-                                    placeholder="metodo"-->
+                                    <select class="form-control" aria-placeholder="Elegir método" id="metodoSelect" name="metodo"></select>
                               </div>
                         </div>
                   </div>
@@ -116,9 +108,12 @@
                               </div>
                         </div>
                   </div>
+                  <div class="errorContainer">
+                        <div id="error"></div>
+                  </div>
                   <div class="row mt-1">
                         <div class="col lg-12">
-                              <button type="submit" class="btn btn-outline-success btn-lg">Cargar</button>
+                              <button type="submit" class="btn btn-outline-success btn-lg" id="btn-enviar">Cargar</button>
                         </div>
                   </div>
             </form>
@@ -131,6 +126,7 @@
             crossorigin="anonymous"></script>
       
       <script src="js/index.js"></script>
+      <script src="js/validacion2.js"></script>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ return [
         'port' => '3306',
         'database' => 'central_esterilizacion',
         'username' => 'root',
-        'password' => 's4ndr0i99i'
+        'password' => ''
     ],
     'authentication' => [
         'session'  => [
