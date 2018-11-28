@@ -1,3 +1,6 @@
+CREATE SCHEMA `central_esterilizacion` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+USE `central_esterilizacion`;
+
 CREATE TABLE `empresaesterilizadora` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
