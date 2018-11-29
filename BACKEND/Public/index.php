@@ -136,6 +136,9 @@ require_once '../Controller/OperadorCEController.php';
 require_once '../Controller/ProveedorController.php';
 (new ProveedorController($app))->init();
 
+require_once '../Controller/MaterialController.php';
+(new MaterialController($app))->init();
+
 
 
 $app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function($req, $res) {

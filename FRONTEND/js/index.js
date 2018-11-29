@@ -1,11 +1,13 @@
-const urlBase = "http://localhost/central_esterilizacion/BACKEND/Public/index.php/api";
+const urlBase = "http://localhost:8000/misApps/central_esterilizacion/BACKEND/Public/index.php/api";  //SANDRO OFICINA
+//const urlBase = "http://localhost/central_esterilizacion/BACKEND/Public/index.php/api";               //LA DE SIEMPRE
+
 
 const operadorSelect = document.getElementById("operadorSelect");
 const metodoSelect = document.getElementById("metodoSelect");
 const proveedorSelect = document.getElementById("proveedorSelect");
 const empresaSelect = document.getElementById("empresaSelect");
 
-let get = (url) => {
+const get = (url) => {
         return fetch(urlBase + url, {
             method: "GET",
             accept: "application/json",
@@ -60,3 +62,7 @@ Promise.all(promises)
 
     }
 );
+
+btnEnviar.addEventListener('click', (e) => {
+    alert("A");
+});
