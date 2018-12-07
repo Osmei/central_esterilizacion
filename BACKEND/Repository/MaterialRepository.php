@@ -66,8 +66,6 @@ class MaterialRepository extends AbstractRepository {
 
             $db = $this->connect();
             $stmt = $db->prepare($consulta);
-            
-            $material = new Material();
 
             $operador = $material->getOperador();
             $fecha = $material->getFecha();

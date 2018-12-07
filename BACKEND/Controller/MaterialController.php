@@ -57,9 +57,9 @@ class MaterialController
         $material->setFecha($request->getParam('fecha'));
         $material->setHora($request->getParam('hora'));
         $material->setPaciente($request->getParam('paciente'));
-        $material->setNumeroHistoriaClinica($request->getParam('nhc'));
+        $material->setNumeroHistoriaClinica($request->getParam('nroHistoriaClinica'));
         $material->setDescripcionMaterial($request->getParam('descripcion'));
-        $material->setMedicoSolicitante($request->getParam('medico'));
+        $material->setMedicoSolicitante($request->getParam('medicoSolicitante'));
         $material->setPesoDeLaCaja($request->getParam('peso'));
         $material->setProveedor($request->getParam('proveedor'));
         $material->setEmpresa($request->getParam('empresa'));

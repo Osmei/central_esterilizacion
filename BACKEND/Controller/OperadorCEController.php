@@ -18,6 +18,7 @@ class OperadorCEController
         $this->app->group('/api', function () {
             $this->group('/operadoresCE', function () {
                 $this->get('', function (Request $request, Response $response) {
+                    
                     $service = new OperadorCEService();
                     $items = $service->getAll();
 

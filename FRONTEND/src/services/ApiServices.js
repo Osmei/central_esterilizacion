@@ -1,7 +1,9 @@
 import * as storage from '../utils/Storage';
+import { apiUrlBase } from './ApiUrl';
+
 
 export const get = (url) => {
-    return fetch(storage.getConfig().apiUrlBase + url,{
+    return fetch(apiUrlBase + url,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -11,7 +13,7 @@ export const get = (url) => {
 }
 
 export const post = (url, payload) => {
-    return fetch(storage.getConfig().apiUrlBase + url,{
+    return fetch(apiUrlBase + url,{
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {

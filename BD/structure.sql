@@ -25,8 +25,8 @@ CREATE TABLE `proveedor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB CHARSET=utf8;
 
-CREATE TABLE `central_esterilizacion`.`material` (
-  `id` BIGINT(20) NOT NULL,
+CREATE TABLE `material` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `operador` BIGINT(20) NULL,
   `fecha` VARCHAR(50) NULL,
   `hora` VARCHAR(50) NULL,

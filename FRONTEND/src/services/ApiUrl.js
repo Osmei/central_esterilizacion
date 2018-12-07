@@ -1,0 +1,1 @@
+export const apiUrlBase = "http://localhost:8000/misApps/central_esterilizacion/BACKEND/Public/index.php/api/";

@@ -4,7 +4,7 @@ require_once '../Commons/Errors/ApiError.php';
 require_once '../Commons/Exceptions/UnauthorizedException.php';
 
 class AuthMiddleware {
-	public function __invoke($req, $res, $next) {
+	public function __invoke($req, $res, $next) {   die("AAA");
         $pos = strpos($req->getUri()->getPath(), 'api/public');
         if($pos === false && !$req->isOptions()) {
             if($req->hasHeader('Authorization-Token')) {
