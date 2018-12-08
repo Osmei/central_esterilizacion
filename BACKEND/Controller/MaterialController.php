@@ -23,15 +23,15 @@ class MaterialController
                     return $response->withJson($instrumentales, 200);
                 });
 
-                /*$this->get('/{id}', function(Request $request, Response $response) {
+                $this->get('/{id}', function(Request $request, Response $response) {
                     $id = $request->getAttribute('id');
-                    $service = new ProveedorService();
-                    $proveedor = $service->get($id);
-                    if ($proveedor == null) {
+                    $service = new MaterialService();
+                    $instrumental = $service->get($id);
+                    if ($instrumental == null) {
                         return $response->withStatus(204);
                     }
-                    return $response->withJson($proveedor, 200);
-                });*/
+                    return $response->withJson($instrumental, 200);
+                });
 
                 $this->post('', function(Request $request, Response $response) {
                     $material = MaterialController::getInstanceFromRequest($request);
@@ -58,10 +58,10 @@ class MaterialController
         $material->setFecha($request->getParam('fecha'));
         $material->setHora($request->getParam('hora'));
         $material->setPaciente($request->getParam('paciente'));
-        $material->setNumeroHistoriaClinica($request->getParam('nroHistoriaClinica'));
-        $material->setDescripcionMaterial($request->getParam('descripcion'));
+        $material->setNumeroHistoriaClinica($request->getParam('numeroHistoriaClinica'));
+        $material->setDescripcionMaterial($request->getParam('descripcionMaterial'));
         $material->setMedicoSolicitante($request->getParam('medicoSolicitante'));
-        $material->setPesoDeLaCaja($request->getParam('peso'));
+        $material->setPesoDeLaCaja($request->getParam('pesoDeLaCaja'));
         $material->setProveedor($request->getParam('proveedor'));
         $material->setEmpresa($request->getParam('empresa'));
         $material->setMetodo($request->getParam('metodo'));

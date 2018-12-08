@@ -5,9 +5,9 @@ require_once '../Model/InstrumentalGrid.php';
 
 class MaterialRepository extends AbstractRepository {
 
-    /*public function get($id) {
+    public function get($id) {
         try{
-            $sql = "SELECT * FROM empresaesterilizadora WHERE id=:id";
+            $sql = "SELECT * FROM material WHERE id=:id";
             $db = $this->connect();
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':id', $id);
@@ -18,17 +18,28 @@ class MaterialRepository extends AbstractRepository {
                 return null;
             }
             
-            $proveedor = new Proveedor();
+            $instrumental = new Material();
+            $instrumental->setId((int)$item->id);
+            $instrumental->setOperador($item->operador);
+            $instrumental->setFecha($item->fecha);
+            $instrumental->setHora($item->hora);
+            $instrumental->setPaciente($item->paciente);
+            $instrumental->setNumeroHistoriaClinica($item->numeroHistoriaClinica);
+            $instrumental->setDescripcionMaterial($item->descripcionMaterial);
+            $instrumental->setMedicoSolicitante($item->medicoSolicitante);
+            $instrumental->setPesoDeLaCaja($item->pesoDeLaCaja);
+            $instrumental->setProveedor($item->proveedor);
+            $instrumental->setEmpresa($item->empresa);
+            $instrumental->setMetodo($item->metodo);
+            $instrumental->setObservaciones($item->observaciones);
 
-            $proveedor->setId((int)$item->id);
-            $proveedor->setNombre($item->nombre);
         }finally{
             $stmt = null;            
             $this->disconnect();
         }
         
-        return $proveedor;
-    }*/
+        return $instrumental;
+    }
 
     public function getAll(): Array{
         

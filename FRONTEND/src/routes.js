@@ -209,7 +209,7 @@ const routes = [
 
   { path: '/configuracion/instrumental', exact: true, name: 'Instrumental', component: Instrumentales },
   { path: '/configuracion/instrumental/nuevo', exact: true, name: 'Registrar Instrumental', component: Instrumental },
-  { path: '/configuracion/instrumental/ver', exact: true, name: 'Ver Instrumental Registrado', component: Instrumental },
+  { path: '/configuracion/instrumental/ver/:id', exact: true, name: 'Ver Instrumental Registrado', component: Instrumental },
   
   { path: '/configuracion/productos', exact: true, name: 'Productos', component: Productos },
   { path: '/configuracion/productos/nuevo', exact: true, name: 'Alta de Producto', component: Producto },

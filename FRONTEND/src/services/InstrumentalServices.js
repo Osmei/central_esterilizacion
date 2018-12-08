@@ -7,3 +7,7 @@ export const nuevoInstrumental = (instrumental) => {
 export const getInstrumentales = () => {
     return get("materiales");
 }
+
+export const getInstrumental = (id) => {
+    return get("materiales/"+id);
+}

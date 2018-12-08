@@ -13,7 +13,7 @@ const InstrumentalFila = (props) => {
             <td>
                 <i  className="fa fa-search fa-lg"
                     data-tip="Ver Información"
-                    onClick={()=>props.history.push("/configuracion/instrumental/ver")} />
+                    onClick={()=>props.history.push("/configuracion/instrumental/ver/"+props.instrumental.id)} />
                 <ReactToolTip   place="top" type="info" effect="float"  />
             </td>
         </tr>        

@@ -7,21 +7,22 @@ import { getProveedores } from '../../../services/ProveedorServices';
 import { getEmpresas } from '../../../services/EmpresaServices';
 import { getMetodos } from '../../../services/MetodoServices';
 
-import { nuevoInstrumental } from '../../../services/InstrumentalServices';
+import { nuevoInstrumental, getInstrumental } from '../../../services/InstrumentalServices';
 
 class Instrumental extends Component{
     constructor(props){
         super(props);
         this.state = {
             instrumental: {
+                id: null,
                 operador: null,
                 fecha: null,
                 hora: null,
                 paciente: null,
-                nroHistoriaClinica: null,
-                descripcion: null,
+                numeroHistoriaClinica: null,
+                descripcionMaterial: null,
                 medicoSolicitante: null,
-                peso: null,
+                pesoDeLaCaja: null,
                 proveedor: null,
                 empresa: null,
                 metodo: null,
@@ -84,6 +85,13 @@ class Instrumental extends Component{
 
         arrayPromises.push(p1,p2,p3,p4);
 
+        if(this.props.match.params.id){
+            const idUrl = this.props.match.params.id;
+            let p5 = getInstrumental(idUrl).then(result=>result.json());
+
+            arrayPromises.push(p5);
+        }
+
         Promise.all(arrayPromises)
         .then(
             (result) => {
@@ -108,8 +116,11 @@ class Instrumental extends Component{
                     )
                 })
                 
-                if(that.props.history.location.pathname === "/configuracion/instrumental/ver"){
+                if(that.props.history.location.pathname === "/configuracion/instrumental/ver/"+this.props.match.params.id){
                     miState.verDatos = true;
+                }
+                if(this.props.match.params.id){
+                    miState.instrumental = result[4];
                 }
 
                 miState.loaded = true;
@@ -119,15 +130,18 @@ class Instrumental extends Component{
 
     submitForm(event){
         const miState = {...this.state};
+        const that = this;
+
         let instrumental = {            
+            id: null,
             operador: null,
             fecha: null,
             hora: null,
             paciente: null,
-            nroHistoriaClinica: null,
-            descripcion: null,
+            numeroHistoriaClinica: null,
+            descripcionMaterial: null,
             medicoSolicitante: null,
-            peso: null,
+            pesoDeLaCaja: null,
             proveedor: null,
             empresa: null,
             metodo: null,
@@ -147,43 +161,55 @@ class Instrumental extends Component{
                             detalle: []
                         }
                         miState.primeraVez = false;
+
+                        that.setState(miState);
+                        setTimeout(() => {
+                            this.props.history.push("/");
+                        }, 2500);
                     });
                 }else if(result.status===400){
                     result.json()
                     .then(result=>{
                         miState.status = result;
                         miState.primeraVez = false;
+
+                        that.setState(miState);
                     });
                 }
 
-                this.setState(miState);
             }
         )
     }
 
     render(){
-        if(!this.state.loaded)
+        let miState = {...this.state};
+        if(!miState.loaded)
             return null;
-
+        
         let mensaje = null;
-        if(!this.state.primeraVez){
-            console.log("si?");
-            if(this.state.status.codigo === 2001){
-                console.log("estoy por acá");
-                mensaje =
-                    <Alert color="success">
-                        {this.state.status.mensaje}
-                    </Alert>
-            }else if(this.state.status.codigo === 4000){
-                console.log("estoy por allá");
-                mensaje =
-                    (<Alert color="danger">
-                        {this.state.status.mensaje}
-                    </Alert>)
-            }
-        }
+        mensaje =   !miState.primeraVez ?
+                        miState.status.codigo === 2001  ?
+                            (<Alert color="success">
+                                <strong>{miState.status.mensaje}</strong>
+                                <br />
+                                Usted será redirigido al inicio
+                            </Alert>)   : 
+                        miState.status.codigo === 4000  ?
+                            (<Alert color="danger">
+                                <strong>{miState.status.mensaje}</strong>
+                                <ul>
+                                    {
+                                        miState.status.detalle.map((detalle, index)=>{
+                                            return(
+                                                <li key={index}>{detalle}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
+                            </Alert>)   : null
+                        :   null
 
-        return(
+    return(
         <Card> 
             <CardHeader>
                 <h4>Registrar Instrumental</h4>
@@ -199,7 +225,7 @@ class Instrumental extends Component{
                                         isSearchable={true} isClearable={true}
                                         isDisabled={this.state.verDatos ? "true" : ""}
                                         options={this.state.operadores}
-                                        value={ this.state.operadores.find(e => e.value === this.state.instrumental.operador)}
+                                        value={ this.state.operadores.find(e => e.value === parseInt(this.state.instrumental.operador))}
                                         onChange={(e) => this.handleSelect("operador", e)}
                                 />
                             </FormGroup>
@@ -241,11 +267,11 @@ class Instrumental extends Component{
                         </Col>
                         <Col xs="6">
                             <FormGroup>
-                                <Label htmlFor="nroHistoriaClinica">Número de Historia Clínica</Label>
+                                <Label htmlFor="numeroHistoriaClinica">Número de Historia Clínica</Label>
                                 <Input  type="text" placeholder="Ingresar Número de Historia Clínica"
-                                        id="nroHistoriaClinica"  name="nroHistoriaClinica"
+                                        id="numeroHistoriaClinica"  name="numeroHistoriaClinica"
                                         disabled={this.state.verDatos ? "true" : ""}
-                                        value={this.state.instrumental.nroHistoriaClinica ? this.state.instrumental.nroHistoriaClinica : ''}
+                                        value={this.state.instrumental.numeroHistoriaClinica ? this.state.instrumental.numeroHistoriaClinica : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -254,11 +280,11 @@ class Instrumental extends Component{
                     <Row>
                         <Col xs="4">
                             <FormGroup>
-                                <Label htmlFor="descripcion">Descripción del Material</Label>
+                                <Label htmlFor="descripcionMaterial">Descripción del Material</Label>
                                 <Input  type="text" placeholder="Ingresar Descripción del Material"
-                                        id="descripcion"  name="descripcion"
+                                        id="descripcionMaterial"  name="descripcionMaterial"
                                         disabled={this.state.verDatos ? "true" : ""}
-                                        value={this.state.instrumental.descripcion ? this.state.instrumental.descripcion : ''}
+                                        value={this.state.instrumental.descripcionMaterial ? this.state.instrumental.descripcionMaterial : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -276,11 +302,11 @@ class Instrumental extends Component{
                         </Col>
                         <Col xs="4">
                             <FormGroup>
-                                <Label htmlFor="peso">Peso de la Caja</Label>
+                                <Label htmlFor="pesoDeLaCaja">Peso de la Caja</Label>
                                 <Input  type="text" placeholder="Ingresar Peso de la Caja"
-                                        id="peso"  name="peso"
+                                        id="pesoDeLaCaja"  name="pesoDeLaCaja"
                                         disabled={this.state.verDatos ? "true" : ""}
-                                        value={this.state.instrumental.peso ? this.state.instrumental.peso : ''}
+                                        value={this.state.instrumental.pesoDeLaCaja ? this.state.instrumental.pesoDeLaCaja : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -295,7 +321,7 @@ class Instrumental extends Component{
                                         isSearchable={true} isClearable={true}
                                         options={this.state.proveedores}
                                         isDisabled={this.state.verDatos ? "true" : ""}
-                                        value={ this.state.proveedores.find(e => e.value === this.state.instrumental.proveedor)}
+                                        value={ this.state.proveedores.find(e => e.value === parseInt(this.state.instrumental.proveedor))}
                                         onChange={(e) => this.handleSelect("proveedor", e)}
                                 />
                             </FormGroup>
@@ -308,7 +334,7 @@ class Instrumental extends Component{
                                         isSearchable={true} isClearable={true}
                                         options={this.state.empresas}
                                         isDisabled={this.state.verDatos ? "true" : ""}
-                                        value={ this.state.empresas.find(e => e.value === this.state.instrumental.empresa)}
+                                        value={ this.state.empresas.find(e => e.value === parseInt(this.state.instrumental.empresa))}
                                         onChange={(e) => this.handleSelect("empresa", e)}
                                 />
                             </FormGroup>
@@ -321,7 +347,7 @@ class Instrumental extends Component{
                                         isSearchable={true} isClearable={true}
                                         options={this.state.metodos}
                                         isDisabled={this.state.verDatos ? "true" : ""}
-                                        value={ this.state.metodos.find(e => e.value === this.state.instrumental.metodo)}
+                                        value={ this.state.metodos.find(e => e.value === parseInt(this.state.instrumental.metodo))}
                                         onChange={(e) => this.handleSelect("metodo", e)}
                                 />
                             </FormGroup>
@@ -341,7 +367,7 @@ class Instrumental extends Component{
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs="4">
+                        <Col xs="12">
                             {mensaje}
                         </Col>
                     </Row>
@@ -353,7 +379,7 @@ class Instrumental extends Component{
                     Registrar
                 </Button>
                 <Button color="danger"
-                        onClick={()=>this.props.history.push("/configuracion/instrumental")}>
+                        onClick={()=>this.props.history.push("/")}>
                     Cancelar
                 </Button>
             </CardFooter>

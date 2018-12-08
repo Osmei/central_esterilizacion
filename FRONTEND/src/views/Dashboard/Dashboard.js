@@ -6,7 +6,9 @@ import { getInstrumentales } from '../../services/InstrumentalServices';
 
 class Dashboard extends Component{
     state = {
-        instrumentales: []
+        instrumentales: [],
+
+        loaded: false
     }
 
     componentDidMount(){
@@ -18,11 +20,15 @@ class Dashboard extends Component{
             result => {
                 miState.instrumentales = result;
 
+                miState.loaded = true;
                 that.setState(miState);
         });
     }
 
     render(){
+        if(!this.state.loaded)
+            return null;
+            
         return(
         <Card>
             <CardHeader style={{fontSize:"1.5em"}}>
