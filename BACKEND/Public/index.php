@@ -8,7 +8,7 @@ require_once '../Commons/Validation/ValidationTranslation.php';
 
 use Respect\Validation\Exceptions\ValidationException as ValidationException;
 
-$checkAuthentication = true;
+$checkAuthentication = false;
 date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 
@@ -21,7 +21,7 @@ $configuration = [
 ];
 $container = new \Slim\Container($configuration);
 $app = new \Slim\App($container);
-//if($checkAuthentication) $app->add(new AuthMiddleware());
+if($checkAuthentication) $app->add(new AuthMiddleware());
 $app->add(new CorsMiddleware());
 
 $container['notFoundHandler'] = function($container) {

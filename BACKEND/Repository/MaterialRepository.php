@@ -1,6 +1,7 @@
 <?php
 require_once 'AbstractRepository.php';
 require_once '../Model/Material.php';
+require_once '../Model/InstrumentalGrid.php';
 
 class MaterialRepository extends AbstractRepository {
 
@@ -27,37 +28,42 @@ class MaterialRepository extends AbstractRepository {
         }
         
         return $proveedor;
-    }
+    }*/
 
     public function getAll(): Array{
         
         try{
             $db = $this->connect();
-            $proveedores = Array();
-            $sql = "SELECT * FROM empresaesterilizadora";
+            $instrumentales = Array();
+            $sql = "SELECT m.id, op.nombre, m.paciente, m.numeroHistoriaClinica, m.medicoSolicitante 
+                        FROM material m
+                            INNER JOIN operadorce op ON (m.operador = op.id)";
             $stmt = $db->prepare($sql);
             $stmt->execute();
             $items = $stmt->fetchAll(PDO::FETCH_OBJ);
             
             if($items == null){
-                return $proveedores;
+                return $instrumentales;
             }
 
             foreach ($items as $item) {
-                $proveedor = new Proveedor();
-
-                $proveedor->setId((int)$item->id);
-                $proveedor->setNombre($item->nombre);
+                $instrumentalGrid = new InstrumentalGrid();
+                                
+                $instrumentalGrid->setId((int)$item->id);
+                $instrumentalGrid->setOperador($item->nombre);
+                $instrumentalGrid->setPaciente($item->paciente);
+                $instrumentalGrid->setNumeroHistoriaClinica((int)$item->numeroHistoriaClinica);
+                $instrumentalGrid->setMedicoSolicitante($item->medicoSolicitante);
                 
-                array_push($proveedores,$proveedor);
+                array_push($instrumentales,$instrumentalGrid);
             }            
         }finally{
             $stmt = null;         
             $this->disconnect();
         }
         
-        return $proveedores;
-    }*/
+        return $instrumentales;
+    }
 
     public function create($material): Material{
         try{            

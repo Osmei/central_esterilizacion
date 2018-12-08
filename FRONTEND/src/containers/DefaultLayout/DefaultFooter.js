@@ -15,7 +15,7 @@ class DefaultFooter extends Component {
 
     return (
       <React.Fragment>
-        <span className="ml-auto">Powered by <a href="https://coreui.io/react">Smart 360</a> &copy; </span>
+        <span className="ml-auto">Powered by <a href="http://www.smart360.com.ar" target="_blank">Smart 360</a> &copy; </span>
       </React.Fragment>
     );
   }

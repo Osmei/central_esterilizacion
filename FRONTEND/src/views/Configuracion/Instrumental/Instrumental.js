@@ -38,6 +38,8 @@ class Instrumental extends Component{
             empresas: [],
             metodos: [],
 
+            verDatos: false,
+
             loaded: false
         }
         this.submitForm = this.submitForm.bind(this);
@@ -105,6 +107,10 @@ class Instrumental extends Component{
                         {value: metodo.id, label: metodo.nombre}
                     )
                 })
+                
+                if(that.props.history.location.pathname === "/configuracion/instrumental/ver"){
+                    miState.verDatos = true;
+                }
 
                 miState.loaded = true;
                 that.setState(miState);
@@ -150,7 +156,7 @@ class Instrumental extends Component{
                     });
                 }
 
-                this.setState(miState, console.log("miState",miState));
+                this.setState(miState);
             }
         )
     }
@@ -161,12 +167,13 @@ class Instrumental extends Component{
 
         let mensaje = null;
         if(!this.state.primeraVez){
+            console.log("si?");
             if(this.state.status.codigo === 2001){
                 console.log("estoy por acá");
                 mensaje =
-                    (<Alert color="success">
+                    <Alert color="success">
                         {this.state.status.mensaje}
-                    </Alert>)
+                    </Alert>
             }else if(this.state.status.codigo === 4000){
                 console.log("estoy por allá");
                 mensaje =
@@ -190,6 +197,7 @@ class Instrumental extends Component{
                                 <Select name="operadorCE"  placeholder="Seleccionar un operador..."
                                         valueKey="value"    labelKey="label"
                                         isSearchable={true} isClearable={true}
+                                        isDisabled={this.state.verDatos ? "true" : ""}
                                         options={this.state.operadores}
                                         value={ this.state.operadores.find(e => e.value === this.state.instrumental.operador)}
                                         onChange={(e) => this.handleSelect("operador", e)}
@@ -201,7 +209,8 @@ class Instrumental extends Component{
                                 <Label htmlFor="fecha">Fecha</Label>
                                 <Input  type="date" placeholder="Ingresar Fecha"
                                         id="fecha"  name="fecha"
-                                        value={this.state.instrumental.fecha}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.fecha ? this.state.instrumental.fecha : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -209,9 +218,10 @@ class Instrumental extends Component{
                         <Col xs="4">
                             <FormGroup>
                                 <Label htmlFor="hora">Hora</Label>
-                                <Input  type="text" placeholder="Ingresar Hora"
+                                <Input  type="time" placeholder="Ingresar Hora"
                                         id="hora"  name="hora"
-                                        value={this.state.instrumental.hora}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.hora ? this.state.instrumental.hora : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -223,7 +233,8 @@ class Instrumental extends Component{
                                 <Label htmlFor="paciente">Paciente</Label>
                                 <Input  type="text" placeholder="Ingresar Paciente"
                                         id="paciente"  name="paciente"
-                                        value={this.state.instrumental.paciente}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.paciente ? this.state.instrumental.paciente : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -233,7 +244,8 @@ class Instrumental extends Component{
                                 <Label htmlFor="nroHistoriaClinica">Número de Historia Clínica</Label>
                                 <Input  type="text" placeholder="Ingresar Número de Historia Clínica"
                                         id="nroHistoriaClinica"  name="nroHistoriaClinica"
-                                        value={this.state.instrumental.nroHistoriaClinica}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.nroHistoriaClinica ? this.state.instrumental.nroHistoriaClinica : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -245,7 +257,8 @@ class Instrumental extends Component{
                                 <Label htmlFor="descripcion">Descripción del Material</Label>
                                 <Input  type="text" placeholder="Ingresar Descripción del Material"
                                         id="descripcion"  name="descripcion"
-                                        value={this.state.instrumental.descripcion}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.descripcion ? this.state.instrumental.descripcion : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -255,7 +268,8 @@ class Instrumental extends Component{
                                 <Label htmlFor="medicoSolicitante">Médico Solicitante</Label>
                                 <Input  type="text" placeholder="Ingresar Médico Solicitante"
                                         id="medicoSolicitante"  name="medicoSolicitante"
-                                        value={this.state.instrumental.medicoSolicitante}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.medicoSolicitante ? this.state.instrumental.medicoSolicitante : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -265,7 +279,8 @@ class Instrumental extends Component{
                                 <Label htmlFor="peso">Peso de la Caja</Label>
                                 <Input  type="text" placeholder="Ingresar Peso de la Caja"
                                         id="peso"  name="peso"
-                                        value={this.state.instrumental.peso}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.peso ? this.state.instrumental.peso : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>
@@ -279,6 +294,7 @@ class Instrumental extends Component{
                                         valueKey="value"    labelKey="label"
                                         isSearchable={true} isClearable={true}
                                         options={this.state.proveedores}
+                                        isDisabled={this.state.verDatos ? "true" : ""}
                                         value={ this.state.proveedores.find(e => e.value === this.state.instrumental.proveedor)}
                                         onChange={(e) => this.handleSelect("proveedor", e)}
                                 />
@@ -291,6 +307,7 @@ class Instrumental extends Component{
                                         valueKey="value"    labelKey="label"
                                         isSearchable={true} isClearable={true}
                                         options={this.state.empresas}
+                                        isDisabled={this.state.verDatos ? "true" : ""}
                                         value={ this.state.empresas.find(e => e.value === this.state.instrumental.empresa)}
                                         onChange={(e) => this.handleSelect("empresa", e)}
                                 />
@@ -303,6 +320,7 @@ class Instrumental extends Component{
                                         valueKey="value"    labelKey="label"
                                         isSearchable={true} isClearable={true}
                                         options={this.state.metodos}
+                                        isDisabled={this.state.verDatos ? "true" : ""}
                                         value={ this.state.metodos.find(e => e.value === this.state.instrumental.metodo)}
                                         onChange={(e) => this.handleSelect("metodo", e)}
                                 />
@@ -315,7 +333,8 @@ class Instrumental extends Component{
                                 <Label htmlFor="observaciones">Observaciones</Label>
                                 <Input  type="textarea" placeholder="Ingresar Observaciones"
                                         id="observaciones"  name="observaciones"
-                                        value={this.state.instrumental.observaciones}
+                                        disabled={this.state.verDatos ? "true" : ""}
+                                        value={this.state.instrumental.observaciones ? this.state.instrumental.observaciones : ''}
                                         onChange={this.handleInput}
                                 />
                             </FormGroup>

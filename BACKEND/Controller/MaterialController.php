@@ -16,13 +16,14 @@ class MaterialController
         $this->app->group('/api', function () {
             $this->group('/materiales', function () {
 
-                /*$this->get('', function (Request $request, Response $response) {
-                    $service = new ProveedorService();
-                    $items = $service->getAll();
+                $this->get('', function (Request $request, Response $response) {
+                    $service = new MaterialService();
+                    $instrumentales = $service->getAll();
 
-                    return $response->withJson($items, 200);
+                    return $response->withJson($instrumentales, 200);
                 });
-                $this->get('/{id}', function(Request $request, Response $response) {
+
+                /*$this->get('/{id}', function(Request $request, Response $response) {
                     $id = $request->getAttribute('id');
                     $service = new ProveedorService();
                     $proveedor = $service->get($id);

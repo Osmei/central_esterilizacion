@@ -29,7 +29,7 @@ class Productos extends Component{
             </Button>
           </CardHeader>
           <CardBody>
-            <ProductosGrilla productos={this.state.productos} />
+            {/*<ProductosGrilla productos={this.state.productos} />*/}
           </CardBody>
         </Card>
       </React.Fragment>

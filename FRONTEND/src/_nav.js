@@ -25,9 +25,9 @@ export default {
     },*/
     {
       name: 'Registrar Instrumental',
-      url: '/configuracion/instrumental',
+      url: '/configuracion/instrumental/nuevo',
       icon: 'icon-pencil',
-    },
+    }/*,
     {
       title: true,
       name: 'Administración',
@@ -40,7 +40,7 @@ export default {
       name: 'Productos',
       url: '/configuracion/productos',
       icon: 'icon-pencil',
-    },
+    },*/
     /*{
       name: 'Pages',
       url: '/pages',

@@ -8,17 +8,20 @@ const InstrumentalGrilla = (props) => {
         <Table>
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
+                    <th>Operador</th>
+                    <th>Paciente</th>
+                    <th>Nro. Historia Clínica</th>
+                    <th>Médico Solicitante</th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody>            
-            {
-                
-            }
+            <tbody>
+            { props.instrumentales.map((instrumental, index)=> {
+                return(
+                    <InstrumentalFila   key={index}
+                                        instrumental={instrumental} />
+                )
+            }) }
             </tbody>                        
         </Table>
     );
